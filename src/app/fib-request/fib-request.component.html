@@ -1,0 +1,17 @@
+<div *ngIf="!calculation">
+  <span>fibonacci series:</span>
+  <button (click)="onDel()">-</button>
+  <input
+    *ngFor="let fib of fibs"
+    [(ngModel)]="fib.number"
+    (keydown.enter)="onAdd()"
+    (keydown.control.x)="onDel()"
+    placeholder="e.g. 10"
+  />
+  <button (click)="onAdd()">+</button>
+  <button (click)="onCalculate()">calculate</button>
+</div>
+<div *ngIf="calculation">
+  <span>calculation has been started for:</span>
+  <div class="btn" *ngFor="let fib of fibs">{{fib.number}}</div>
+</div>
