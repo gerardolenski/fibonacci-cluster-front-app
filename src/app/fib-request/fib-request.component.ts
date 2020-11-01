@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Fib} from "./fib";
-import {TaskManagerService} from "../task-manager/task-manager.service";
 import {Task} from '../model/task';
+import {TaskManagerService} from "../task-manager/task-manager.service";
 
 @Component({
   selector: 'app-fib-request',
@@ -30,15 +30,8 @@ export class FibRequestComponent implements OnInit {
   onCalculate(): void {
     this.taskManagerService.sendFibSeries(this.fibs.map(f => f.number))
       .subscribe(task => {
-        this.task = task;
-
+        this.task = task
+        this.taskManagerService.setActiveTask(task);
       })
   }
-
-  onKeyDown(event) {
-    if (event.key) {
-      this.onAdd();
-    }
-  }
-
 }
