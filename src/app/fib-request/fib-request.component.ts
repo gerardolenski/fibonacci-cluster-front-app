@@ -20,7 +20,7 @@ export class FibRequestComponent implements OnInit {
   }
 
   onAdd(): void {
-    this.fibs.push({number: null});
+    this.fibs.push({number: this.fibs[this.fibs.length - 1].number + 1});
   }
 
   onDel(): void {

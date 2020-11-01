@@ -1,11 +1,29 @@
-<div *ngIf="getActiveTask()">
-  <h2>Waiting for Fibonacci Jobs</h2>
-  <div class="btn" *ngFor="let job of getJobs()" (click)="showMoreDetails(job)">
-    <div><div class="title">start time:</div>{{job.stopTime}}</div>
-    <div><div class="title">stop time:</div>{{job.startTime}}</div>
-    <div><div class="title">details:</div>{{job.jobDetails}}</div>
-    <div *ngIf="detailedJobId !== job.jobId"><div class="title">result:</div>{{job.jobResult.length > 100 ? job.jobResult.substr(0,100) + '...' : job.jobResult}}</div>
-    <div class="txt" *ngIf="detailedJobId === job.jobId"><div class="title">result:</div>{{job.jobResult}}</div>
-    <div *ngIf="job.jobProcessingTime !== null"><div class="title">processing time:</div>{{job.jobProcessingTime}} ms</div>
+<div *ngIf="getActiveTask()" class="container-fluid">
+  <div>
+    <p class="text-secondary text-center">Please wait for Fibonacci Jobs</p>
+    <hr>
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Start time</th>
+        <th scope="col">Stop Time</th>
+        <th scope="col">Details</th>
+        <th scope="col">Result</th>
+        <th scope="col">Processing time [ms]</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let job of getJobs(); let i = index" (click)="showMoreDetails(job)">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{job.startTime}}</td>
+        <td>{{job.stopTime}}</td>
+        <td>{{job.jobDetails}}</td>
+        <td class="pointer" *ngIf="detailedJobId !== job.jobId">{{job.jobResult.length > 100 ? job.jobResult.substr(0, 100) + '...' : job.jobResult}}</td>
+        <td class="pointer full-result" *ngIf="detailedJobId === job.jobId">{{job.jobResult}}</td>
+        <td>{{job.jobProcessingTime}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>

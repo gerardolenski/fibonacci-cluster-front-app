@@ -1,27 +1,11 @@
-span {
-  margin-right: 5px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 2px 4px;
-  margin: 3px;
+table {
   font-size: 14px;
-  text-align: left;
-  white-space: nowrap;
-  vertical-align: middle;
-  user-select: none;
-  background-image: none;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  text-decoration: none;
-  background-color: lightgray;
-  border-color: grey;
-  color: black;
-  cursor: pointer;
 }
 
-.title {
-  display: inline-block;
-  width: 9em;
+.full-result {
+  word-break: break-word;
+}
+
+.pointer {
+  cursor: pointer;
 }

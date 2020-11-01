@@ -1,17 +1,27 @@
-<div *ngIf="!task">
-  <span>fibonacci series:</span>
-  <button (click)="onDel()">-</button>
-  <input
-    *ngFor="let fib of fibs"
-    [(ngModel)]="fib.number"
-    (keydown.enter)="onAdd()"
-    (keydown.control.x)="onDel()"
-    placeholder="e.g. 10"
-  />
-  <button (click)="onAdd()">+</button>
-  <button (click)="onCalculate()">calculate</button>
-</div>
-<div *ngIf="task">
-  <span>calculation has been started for:</span>
-  <div class="btn" *ngFor="let fib of fibs">{{fib.number}}</div>
+<h2 class="text-primary">Fibonacci Series:</h2>
+<div class="container-fluid">
+  <div *ngIf="!task">
+    <div class="row ml-1">
+      <div class="btn-group" role="group" aria-label="Add/remove series">
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="onDel()">-</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="onAdd()">+</button>
+      </div>
+      <button type="button" class="btn btn-outline-primary btn-sm mr-1 ml-1 col-1" (click)="onCalculate()">calculate</button>
+    </div>
+    <div class="row ml-1">
+      <input
+        *ngFor="let fib of fibs"
+        [(ngModel)]="fib.number"
+        (keydown.enter)="onAdd()"
+        (keydown.control.x)="onDel()"
+        placeholder="e.g. 10"
+        type = number
+        class="col-1 mr-2 mt-1"/>
+    </div>
+  </div>
+  <div class="row" *ngIf="task">
+    <p class="text-dark ml-2">calculation has been started for:</p>
+    <div class="ml-1" *ngFor="let fib of fibs"><span class="badge badge-secondary">{{fib.number}}</span></div>
+  </div>
+  <hr>
 </div>

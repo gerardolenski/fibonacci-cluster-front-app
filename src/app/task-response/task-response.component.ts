@@ -19,12 +19,11 @@ export class TaskResponseComponent implements OnInit {
   }
 
   getActiveTask(): Task {
-    return {taskId: "test"}
-    // return this.taskManagerService.getActiveTask();
+    return this.taskManagerService.getActiveTask();
   }
 
   showMoreDetails(job: Job) {
-    if (this.detailedJobId) {
+    if (this.detailedJobId === job.jobId) {
       this.detailedJobId = null;
     } else
       this.detailedJobId = job.jobId;
