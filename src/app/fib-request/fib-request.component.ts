@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {FibRequest} from "./fibRequest";
+import {Component, OnInit} from '@angular/core';
+import {Fib} from "./fib";
+import {TaskManagerService} from "../task-manager/task-manager.service";
+import {Task} from '../model/task';
 
 @Component({
   selector: 'app-fib-request',
@@ -8,10 +10,11 @@ import {FibRequest} from "./fibRequest";
 })
 export class FibRequestComponent implements OnInit {
 
-  fibs: FibRequest[] = [{number: null}];
-  calculation: boolean = false;
+  fibs: Fib[] = [{number: null}];
+  task: Task = null;
 
-  constructor() { }
+  constructor(private taskManagerService: TaskManagerService) {
+  }
 
   ngOnInit(): void {
   }
@@ -24,8 +27,12 @@ export class FibRequestComponent implements OnInit {
     this.fibs.pop();
   }
 
-  onCalculate() : void {
-    this.calculation = true;
+  onCalculate(): void {
+    this.taskManagerService.sendFibSeries(this.fibs.map(f => f.number))
+      .subscribe(task => {
+        this.task = task;
+
+      })
   }
 
   onKeyDown(event) {

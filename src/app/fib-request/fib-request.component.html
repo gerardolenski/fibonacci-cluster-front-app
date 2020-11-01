@@ -1,4 +1,4 @@
-<div *ngIf="!calculation">
+<div *ngIf="!task">
   <span>fibonacci series:</span>
   <button (click)="onDel()">-</button>
   <input
@@ -11,7 +11,7 @@
   <button (click)="onAdd()">+</button>
   <button (click)="onCalculate()">calculate</button>
 </div>
-<div *ngIf="calculation">
+<div *ngIf="task">
   <span>calculation has been started for:</span>
   <div class="btn" *ngFor="let fib of fibs">{{fib.number}}</div>
 </div>

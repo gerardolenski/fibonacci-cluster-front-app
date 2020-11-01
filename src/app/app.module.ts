@@ -6,11 +6,13 @@ import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
 import {FibRequestComponent} from './fib-request/fib-request.component';
+import { TaskResponseComponent } from './task-response/task-response.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FibRequestComponent
+    FibRequestComponent,
+    TaskResponseComponent
   ],
   imports: [
     BrowserModule,
