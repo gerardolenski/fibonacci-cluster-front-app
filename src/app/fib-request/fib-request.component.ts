@@ -24,7 +24,9 @@ export class FibRequestComponent implements OnInit {
   }
 
   onDel(): void {
-    this.fibs.pop();
+    if (this.fibs.length > 1) {
+      this.fibs.pop();
+    }
   }
 
   onCalculate(): void {
