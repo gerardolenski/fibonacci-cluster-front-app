@@ -15,13 +15,23 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let job of getJobs(); let i = index" (click)="showMoreDetails(job)">
+      <tr *ngFor="let job of getJobs(); let i = index">
         <th scope="row">{{i + 1}}</th>
         <td>{{job.startTime}}</td>
         <td>{{job.stopTime}}</td>
         <td>{{job.jobDetails}}</td>
-        <td class="pointer" *ngIf="detailedJobId !== job.jobId">{{job.jobResult.length > 100 ? job.jobResult.substr(0, 100) + '...' : job.jobResult}}</td>
-        <td class="pointer full-result" *ngIf="detailedJobId === job.jobId">{{job.jobResult}}</td>
+        <td
+          class="pointer"
+          *ngIf="detailedJobId !== job.jobId"
+          (click)="showMoreDetails(job)">
+          {{job.jobResult.length > 100 ? job.jobResult.substr(0, 100) + '...' : job.jobResult}}
+        </td>
+        <td
+          class="pointer full-result"
+          *ngIf="detailedJobId === job.jobId"
+          (click)="showMoreDetails(job)">
+          {{job.jobResult}}
+        </td>
         <td>{{job.jobProcessingTime}}</td>
       </tr>
       </tbody>
