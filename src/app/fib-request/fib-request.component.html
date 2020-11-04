@@ -1,4 +1,4 @@
-<h2 class="text-primary text-center">The most complicated and completely useless dockerized Fibonacci series calculator</h2>
+<h2 class="text-primary text-center text-dark">The most complicated and completely useless dockerized Fibonacci series calculator</h2>
 <div class="container-fluid">
   <div *ngIf="!task">
     <div class="row ml-1">
@@ -6,7 +6,7 @@
         <button type="button" class="btn btn-outline-secondary btn-sm" (click)="onDel()">-</button>
         <button type="button" class="btn btn-outline-secondary btn-sm" (click)="onAdd()">+</button>
       </div>
-      <button type="button" class="btn btn-outline-primary btn-sm mr-1 ml-1 col-1" (click)="onCalculate()">calculate</button>
+      <button type="button" class="btn btn-outline-danger btn-sm mr-1 ml-1 col-1" (click)="onCalculate()">calculate</button>
     </div>
     <div class="row ml-1">
       <input
@@ -23,5 +23,4 @@
     <p class="text-dark ml-2">calculation has been started for:</p>
     <div class="ml-1" *ngFor="let fib of fibs"><span class="badge badge-secondary">{{fib.number}}</span></div>
   </div>
-  <hr>
 </div>

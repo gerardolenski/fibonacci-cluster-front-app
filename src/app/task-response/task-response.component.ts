@@ -32,4 +32,8 @@ export class TaskResponseComponent implements OnInit {
   getJobs(): Job[] {
     return this.taskManagerService.getJobs();
   }
+
+  getProgress() {
+    return this.taskManagerService.getProgress();
+  }
 }

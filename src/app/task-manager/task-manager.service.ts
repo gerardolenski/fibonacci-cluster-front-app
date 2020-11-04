@@ -22,13 +22,14 @@ export class TaskManagerService {
   private taskUrl = '/api/task'
   private activeTask: Task = null;
   private jobs: Job[] = [];
+  private jobsPopulation: number = 0;
+  private progress: number = 0;
 
   constructor(private http: HttpClient) {
   }
 
   setActiveTask(task: Task) {
     this.activeTask = task;
-    this.jobs = [];
     this.retrieveJobsInLoop();
   }
 
@@ -36,11 +37,18 @@ export class TaskManagerService {
     return this.activeTask;
   }
 
+  getProgress(): number {
+    return this.progress;
+  }
+
   getJobs(): Job[] {
     return this.jobs;
   }
 
   sendFibSeries(fibs: number[]): Observable<Task> {
+    this.progress = 0;
+    this.jobsPopulation = fibs.length * 4;
+    this.jobs = [];
     console.log(`Sending Fibonacci calculation task of: ${fibs}`)
     return this.http.post<Task>(this.fibUrl, new FibRequest(fibs), httpOptions)
       .pipe(
@@ -51,12 +59,16 @@ export class TaskManagerService {
 
   retrieveJobs() {
     if (!this.activeTask) return;
+    if (this.progress >= 100) return;
     console.log(`Getting statistics of task: ${this.activeTask}`);
     return this.http.get<TaskStatistics>(`${this.taskUrl}/${this.activeTask.taskId}`)
       .pipe(
         tap((s: TaskStatistics) => console.log(`Received Fibonacci task statistics of: taskId=: ${s.taskId} and jobsCount=${s.jobsCount}`)),
         catchError(this.handleError<TaskStatistics>('getJobs'))
-      ).subscribe(s => this.jobs = s.jobs)
+      ).subscribe(s => {
+        this.jobs = s.jobs;
+        this.progress = this.jobs.length / this.jobsPopulation * 100;
+      })
   }
 
   retrieveJobsInLoop() {
