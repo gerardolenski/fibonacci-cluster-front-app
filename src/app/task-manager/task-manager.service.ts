@@ -63,10 +63,10 @@ export class TaskManagerService {
     console.log(`Getting statistics of task: ${this.activeTask}`);
     return this.http.get<TaskStatistics>(`${this.taskUrl}/${this.activeTask.taskId}`)
       .pipe(
-        tap((s: TaskStatistics) => console.log(`Received Fibonacci task statistics of: taskId=: ${s.taskId} and jobsCount=${s.jobsCount}`)),
+        tap((s: TaskStatistics) => console.log(`Received Fibonacci task statistics of: taskId=: ${s.taskId} and jobsCount=${s.scheduledJobsCount}`)),
         catchError(this.handleError<TaskStatistics>('getJobs'))
       ).subscribe(s => {
-        this.jobs = s.jobs;
+        this.jobs = s.finishedJobs;
         this.progress = this.jobs.length / this.jobsPopulation * 100;
       })
   }
